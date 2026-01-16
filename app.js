@@ -138,7 +138,6 @@ function calcularProgreso() {
 
   const circulo = document.getElementById("avance-circular-barra");
 
-  // 🔥 CIRCUNFERENCIA REAL (r = 28)
   const radio = 28;
   const circunferencia = 2 * Math.PI * radio;
 
@@ -146,7 +145,6 @@ function calcularProgreso() {
   circulo.style.strokeDashoffset =
     circunferencia - (porcentaje / 100) * circunferencia;
 
-  // ✅ Cierra visualmente al 100%
   circulo.style.strokeLinecap = porcentaje === 100 ? "butt" : "round";
 
   document.getElementById("avance-texto").textContent = porcentaje + "%";
@@ -194,14 +192,14 @@ function cerrarEstadisticas() {
    BUSCADOR
 ========================= */
 function buscarMateria(texto) {
-  const f = texto.toLowerCase();
+  const filtro = texto.toLowerCase();
   document.querySelectorAll(".materia").forEach(m => {
     m.style.display =
-      m.querySelector("h4").textContent.toLowerCase().includes(f)
-        ? "flex"
-        : "none";
+      m.querySelector("h4").textContent.toLowerCase().includes(filtro)
+        ? "flex" : "none";
   });
 }
+
 function cargarEstadosGuardados() {
   document.querySelectorAll(".materia").forEach(materia => {
     const nombre = materia.querySelector("h4").innerText.trim();
@@ -232,24 +230,23 @@ function filtrar(tipo) {
   });
 }
 
-/* =========================
-   MODO OSCURO
-========================= */
 function toggleDark() {
+  const btn = document.getElementById("toggleTema");
+  btn.classList.add("agitar");
+  setTimeout(() => btn.classList.remove("agitar"), 400);
+
   document.body.classList.toggle("light");
   document.body.classList.toggle("dark");
 
-  const claro = document.body.classList.contains("light");
-  localStorage.setItem("tema", claro ? "light" : "dark");
-
-  const btn = document.getElementById("toggleTema");
-  btn.textContent = claro ? "☀️" : "🌙";
+  const tema = document.body.classList.contains("light") ? "light" : "dark";
+  btn.textContent = tema === "light" ? "☀️" : "🌙";
+  localStorage.setItem("tema", tema);
 }
-
 function cargarTema() {
   const tema = localStorage.getItem("tema") || "dark";
   document.body.classList.add(tema);
 }
+
 /* =========================
    EXPORTAR PROGRESO
 ========================= */

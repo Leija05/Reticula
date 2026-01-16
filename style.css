@@ -124,6 +124,10 @@ header button:hover {
   background: var(--card-solid);
   color: var(--text);
   transition: box-shadow .3s ease, width .3s ease;
+  transition:
+    width .55s cubic-bezier(.22,1,.36,1),
+    box-shadow .4s ease,
+    transform .45s ease;
 }
 
 #buscador:focus {
@@ -704,6 +708,7 @@ body.light {
   from { transform: scale(.8); }
   to { transform: scale(1); }
 }
+
 /* ===============================
    TRANSICIÓN SUAVE DE TEMA
 ================================ */
@@ -712,8 +717,7 @@ header,
 .semestre,
 .materia,
 .modal-contenido,
-.filtros button,
-#buscador {
+.filtros button {
   transition:
     background-color .6s ease,
     color .6s ease,
