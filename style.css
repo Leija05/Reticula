@@ -275,7 +275,7 @@ header button:hover {
 
 .barra-semestre {
   height: 10px;
-  background: rgba(255,255,255,.15);
+  background: rgba(104, 101, 101, 0.15);
 }
 .relleno {
   height: 100%;

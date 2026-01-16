@@ -187,6 +187,11 @@ function abrirEstadisticas() {
 function cerrarEstadisticas() {
   document.getElementById("modal-estadisticas").style.display = "none";
 }
+document.getElementById("modal-estadisticas").addEventListener("click", e => {
+  if (e.target.id === "modal-estadisticas") {
+    cerrarEstadisticas();
+  }
+});
 
 /* =========================
    BUSCADOR
