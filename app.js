@@ -221,6 +221,35 @@ function cargarEstadosGuardados() {
     }
   });
 }
+
+/* =========================
+   FILTROS
+========================= */
+function filtrar(tipo) {
+  document.querySelectorAll(".materia").forEach(m => {
+    m.style.display =
+      tipo === "todas" || m.classList.contains(tipo) ? "flex" : "none";
+  });
+}
+
+/* =========================
+   MODO OSCURO
+========================= */
+function toggleDark() {
+  document.body.classList.toggle("light");
+  document.body.classList.toggle("dark");
+
+  const claro = document.body.classList.contains("light");
+  localStorage.setItem("tema", claro ? "light" : "dark");
+
+  const btn = document.getElementById("toggleTema");
+  btn.textContent = claro ? "☀️" : "🌙";
+}
+
+function cargarTema() {
+  const tema = localStorage.getItem("tema") || "dark";
+  document.body.classList.add(tema);
+}
 /* =========================
    EXPORTAR PROGRESO
 ========================= */
@@ -284,6 +313,69 @@ document.getElementById("importarArchivo").addEventListener("change", e => {
 
   lector.readAsText(archivo);
 });
+
+/* =========================
+   EXPORTAR A PDF
+========================= */
+function exportarPDF() {
+  const original = document.querySelector(".reticula");
+  if (!original) return;
+
+  // Clonar la retícula
+  const clon = original.cloneNode(true);
+  clon.id = "pdf-reticula";
+
+  // Contenedor temporal invisible
+  const wrapper = document.createElement("div");
+  wrapper.style.position = "fixed";
+  wrapper.style.top = "0";
+  wrapper.style.left = "0";
+  wrapper.style.width = "100%";
+  wrapper.style.background = "#ffffff";
+  wrapper.style.padding = "20px";
+  wrapper.style.zIndex = "-1";
+
+  // Forzar layout limpio para PDF
+  clon.style.display = "grid";
+  clon.style.gridTemplateColumns = "repeat(3, 1fr)";
+  clon.style.gap = "16px";
+
+  // Limpiar estilos que rompen el render
+  clon.querySelectorAll("*").forEach(el => {
+    el.style.animation = "none";
+    el.style.transition = "none";
+    el.style.boxShadow = "none";
+    el.style.backdropFilter = "none";
+    el.style.filter = "none";
+  });
+
+  wrapper.appendChild(clon);
+  document.body.appendChild(wrapper);
+
+  // Generar PDF
+  html2pdf()
+    .set({
+      margin: 0.3,
+      filename: "reticula_academica.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        backgroundColor: "#ffffff",
+        useCORS: true
+      },
+      jsPDF: {
+        unit: "in",
+        format: "letter",
+        orientation: "portrait"
+      }
+    })
+    .from(clon)
+    .save()
+    .then(() => {
+     
+      document.body.removeChild(wrapper);
+    });
+}
 
 /* =========================
    INICIALIZAR
