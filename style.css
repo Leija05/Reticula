@@ -1,0 +1,722 @@
+/* ===============================
+   VARIABLES Y BASE
+================================ */
+:root {
+  --card: rgba(255,255,255,.08);
+  --card-solid: #020617;
+  --text: #e5e7eb;
+  --border: rgba(255,255,255,.12);
+
+  --acreditada: #22c55e;
+  --curso: #3b82f6;
+  --pendiente: #f59e0b;
+  --futura: #a855f7;
+
+  --radius: 18px;
+  --shadow: 0 15px 40px rgba(0,0,0,.45);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 18px;
+  background: radial-gradient(circle at top, #1e293b, #020617 60%);
+  color: var(--text);
+  transition: background .10s ease, color .10s ease;
+}
+
+/* ===============================
+   HEADER
+================================ */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 28px;
+  margin-bottom: 24px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  box-shadow: var(--shadow);
+  animation: slideDown .6s ease;
+}
+
+header h2 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.acciones-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ===============================
+   BOTONES HEADER
+================================ */
+header button {
+  background: rgba(255,255,255,.2);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform .2s, background .2s;
+}
+
+header button:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.3);
+}
+
+/* ===============================
+   TOGGLE TEMA (SOLO ICONO)
+================================ */
+#toggleTema {
+  all: unset;              
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .15s ease;
+}
+
+/* Hover sutil */
+#toggleTema:hover {
+  transform: scale(1.15);
+}
+
+/* Animación al hacer click */
+#toggleTema.agitar {
+  animation: agitar .45s ease;
+}
+
+/* ===============================
+   ANIMACIÓN SHAKE
+================================ */
+@keyframes agitar {
+  0%   { transform: rotate(0deg) scale(1); }
+  20%  { transform: rotate(-12deg) scale(1.15); }
+  40%  { transform: rotate(12deg) scale(1.15); }
+  60%  { transform: rotate(-8deg) scale(1.1); }
+  80%  { transform: rotate(8deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* ===============================
+   BUSCADOR
+================================ */
+#buscador {
+  padding: 10px 14px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  outline: none;
+  font-size: .9rem;
+  width: 220px;
+  background: var(--card-solid);
+  color: var(--text);
+  transition: box-shadow .3s ease, width .3s ease;
+}
+
+#buscador:focus {
+  width: 280px;
+  box-shadow: 0 0 0 3px rgba(59,130,246,.3);
+}
+
+/* ===============================
+   INDICADOR CIRCULAR
+================================ */
+#avance-circular {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform .25s ease;
+}
+
+#avance-circular:hover {
+  transform: scale(1.12);
+}
+
+#avance-circular svg {
+  transform: rotate(-90deg);
+}
+
+#avance-circular circle {
+  fill: none;
+  stroke-width: 4;
+}
+
+#avance-circular circle:first-child {
+  stroke: rgba(255,255,255,.25);
+}
+
+#avance-circular-barra {
+  stroke: #fff;
+  stroke-dasharray: 113;
+  stroke-dashoffset: 113;
+  transition: stroke-dashoffset .6s ease;
+}
+
+#avance-texto {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  font-weight: 800;
+  color: white;
+}
+
+/* ===============================
+   FILTROS
+================================ */
+.filtros {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.filtros button {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 7px 16px;
+  border-radius: 999px;
+  color: var(--text);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background .25s, transform .2s;
+}
+
+.filtros button:hover {
+  background: rgba(255,255,255,.18);
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   RETÍCULA
+================================ */
+.reticula {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+/* ===============================
+   SEMESTRES
+================================ */
+.semestre {
+  background: var(--card);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 18px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  animation: fadeUp .6s ease;
+  transition: transform .25s ease;
+}
+
+.semestre:hover {
+  transform: translateY(-6px);
+}
+
+.semestre h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.meta {
+  font-size: .8rem;
+  opacity: .75;
+  margin-bottom: 12px;
+}
+
+/* ===============================
+   PROGRESO
+================================ */
+.progreso {
+  transition: transform .2s ease;
+}
+
+.progreso small {
+  display: block;
+  margin-top: 6px;
+  font-weight: 600;
+  transition: color .3s ease;
+}
+
+.semestre:has(.materia.acreditada) .progreso small {
+  color: #22c55e;
+}
+
+
+.barra,
+.barra-semestre {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.barra-semestre {
+  height: 10px;
+  background: rgba(255,255,255,.15);
+}
+.relleno {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #22c55e, #3b82f6);
+  transition: width .6s cubic-bezier(.4,0,.2,1);
+}
+
+.relleno,
+.barra-semestre div,
+.barra-general-fill {
+  transition: width .8s cubic-bezier(.4,0,.2,1);
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #3b82f6);
+  transition: width .6s ease;
+}
+
+/* ===============================
+   MATERIAS
+================================ */
+.materia {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border-radius: 14px;
+  font-size: .75rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.materia:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,.35);
+}
+
+.materia:active {
+  transform: scale(.97);
+}
+
+/* ===============================
+   ESTADOS
+================================ */
+.materia.acreditada { background: rgba(34,197,94,.15); border-color: var(--acreditada); }
+.materia.curso { background: rgba(59,130,246,.15); border-color: var(--curso); }
+.materia.pendiente { background: rgba(245,158,11,.18); border-color: var(--pendiente); }
+.materia.cursar { background: rgba(168,85,247,.18); border-color: var(--futura); }
+
+/* ===============================
+   BADGES
+================================ */
+.badge {
+  font-size: .6rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  animation: pop .3s ease;
+}
+
+.badge.acreditada { background: var(--acreditada); }
+.badge.curso { background: var(--curso); }
+.badge.pendiente { background: var(--pendiente); }
+.badge.cursar { background: var(--futura); }
+
+/* ===============================
+   MODAL
+================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-contenido {
+  background: var(--card-solid);
+  border-radius: 22px;
+  padding: 24px;
+  width: 420px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+  animation: zoomIn .35s ease;
+  position: relative;
+}
+
+.cerrar {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+
+.cerrar:hover {
+  background: rgba(255,255,255,.25);
+  transform: rotate(90deg);
+}
+
+/* ===============================
+   TEXTO ESTADÍSTICAS
+================================ */
+.porcentaje {
+  font-size: .65rem;
+  opacity: .7;
+  margin-top: 4px;
+  text-align: right;
+}
+/* ===============================
+   ESTILOS SOLO PARA EXPORTAR PDF
+================================ */
+body.exportando {
+  background: white !important;
+  color: #000 !important;
+}
+
+/* quitar blur y transparencias */
+body.exportando .semestre,
+body.exportando .materia,
+body.exportando header {
+  backdrop-filter: none !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+/* retícula fija (MUY IMPORTANTE) */
+body.exportando .reticula {
+  grid-template-columns: repeat(9, 1fr) !important;
+  gap: 12px !important;
+}
+
+/* colores sólidos */
+body.exportando .materia.acreditada {
+  background: #dcfce7 !important;
+  border-color: #16a34a !important;
+}
+
+body.exportando .materia.curso {
+  background: #dbeafe !important;
+  border-color: #2563eb !important;
+}
+
+body.exportando .materia.pendiente {
+  background: #fef3c7 !important;
+  border-color: #d97706 !important;
+}
+
+body.exportando .materia.cursar {
+  background: #f3e8ff !important;
+  border-color: #7c3aed !important;
+}
+
+/* desactivar animaciones */
+body.exportando * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ocultar botones */
+body.exportando header,
+body.exportando .filtros,
+body.exportando #avance-circular {
+  display: none !important;
+}
+
+@media print {
+
+  body {
+    background: white !important;
+  }
+
+  .reticula {
+    display: block !important;
+  }
+
+  .semestre {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 24px;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  header,
+  .filtros,
+  #avance-circular {
+    display: none !important;
+  }
+
+}
+/* ===============================
+   MODO PDF (EXPORTACIÓN)
+================================ */
+body.pdf-mode {
+  background: white !important;
+  color: black !important;
+}
+
+/* Quitar efectos pesados */
+body.pdf-mode * {
+  animation: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Header normal */
+body.pdf-mode header {
+  position: relative;
+  background: #2563eb !important;
+  color: white !important;
+}
+
+/* Retícula en columnas fijas */
+body.pdf-mode .reticula {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+/* Semestres */
+body.pdf-mode .semestre {
+  background: white !important;
+  border: 1px solid #ccc !important;
+  page-break-inside: avoid;
+}
+
+/* Materias */
+body.pdf-mode .materia {
+  background: #f8fafc !important;
+  color: black !important;
+  border: 1px solid #ddd !important;
+}
+
+/* Badges visibles */
+body.pdf-mode .badge {
+  color: white !important;
+}
+
+/* Ocultar cosas innecesarias */
+body.pdf-mode .filtros,
+body.pdf-mode #avance-circular,
+body.pdf-mode .acciones-header {
+  display: none !important;
+}
+
+/* Forzar saltos de página */
+body.pdf-mode .semestre:nth-child(6) {
+  page-break-after: always;
+}
+
+/* ===============================
+   MODO CLARO
+================================ */
+body.light {
+  --card: rgba(255,255,255,.85);
+  --card-solid: #ffffff;
+  --text: #0f172a;
+  --border: rgba(0,0,0,.08);
+  --shadow: 0 12px 30px rgba(0,0,0,.12);
+  background: radial-gradient(circle at top, #ffffff, #e2e8f0 65%);
+}
+/* ===============================
+   MODO MOBILE
+================================ */
+@media (max-width: 768px) {
+
+  body {
+    padding: 12px;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  header h2 {
+    font-size: 1.2rem;
+  }
+
+  .barra-superior,
+  .acciones-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  /* ===== BUSCADOR ===== */
+  #buscador {
+    width: 100%;
+    height: 42px;
+    font-size: .9rem;
+  }
+
+  #buscador:focus {
+    width: 100%;
+  }
+
+  /* ===== CÍRCULO DE PROGRESO ===== */
+  #avance-circular {
+    margin: 0 auto;
+    width: 70px;
+    height: 70px;
+  }
+
+  #avance-texto {
+    font-size: 1rem;
+  }
+
+  /* ===== BOTONES HEADER ===== */
+  header button {
+    width: 100%;
+    height: 42px;
+    font-size: .9rem;
+  }
+
+  /* ===== FILTROS ===== */
+  .filtros {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .filtros button {
+    flex: 1 1 45%;
+    text-align: center;
+    font-size: .75rem;
+    padding: 8px;
+  }
+
+  /* ===== RETÍCULA ===== */
+  .reticula {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* ===== SEMESTRES ===== */
+  .semestre {
+    padding: 16px;
+  }
+
+  .semestre h3 {
+    font-size: .95rem;
+  }
+
+  .meta {
+    font-size: .7rem;
+  }
+
+  /* ===== PROGRESO ===== */
+  .progreso small {
+    font-size: .65rem;
+  }
+
+  /* ===== MATERIAS ===== */
+  .materia {
+    font-size: .7rem;
+    padding: 9px 12px;
+  }
+
+  .materia h4 {
+    font-size: .7rem;
+    max-width: 70%;
+  }
+
+  /* ===== BADGES ===== */
+  .badge {
+    font-size: .55rem;
+    padding: 3px 8px;
+  }
+
+  /* ===== MODAL ===== */
+  .modal-contenido {
+    width: 92%;
+    max-height: 85vh;
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .cerrar {
+    top: 10px;
+    right: 12px;
+  }
+
+  /* ===== ESTADÍSTICAS ===== */
+  .semestre-stat h4 {
+    font-size: .8rem;
+  }
+
+  .porcentaje {
+    font-size: .6rem;
+  }
+}
+
+/* ===============================
+   ANIMACIONES
+================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pop {
+  from { transform: scale(.8); }
+  to { transform: scale(1); }
+}
+/* ===============================
+   TRANSICIÓN SUAVE DE TEMA
+================================ */
+body,
+header,
+.semestre,
+.materia,
+.modal-contenido,
+.filtros button,
+#buscador {
+  transition:
+    background-color .6s ease,
+    color .6s ease,
+    border-color .6s ease,
+    box-shadow .6s ease;
+}
